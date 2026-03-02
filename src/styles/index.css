@@ -1,0 +1,36 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* Custom Utilities */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Cursor styles */
+* {
+  cursor: none;
+}
+
+a, button, .cursor-hover {
+  cursor: none;
+}
+
+@media (max-width: 768px) {
+  * {
+    cursor: auto !important;
+  }
+  
+  a, button, .cursor-hover {
+    cursor: pointer !important;
+  }
+}
