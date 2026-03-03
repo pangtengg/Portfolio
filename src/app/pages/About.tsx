@@ -50,7 +50,7 @@ const experiences = [
     role: 'full stack developer intern',
     company: 'ifast global hub ai sdn bhd',
     period: 'july 2025 - october 2025',
-    description: 'working on stocks and etf modules for fsmone, frontend revamp projects, prompt tuning for stella ai agent and building power bi dashboards',
+    description: 'worked on stocks and etf modules for fsmone, frontend revamp projects, prompt tuning for stella ai agent and building power bi dashboards',
   },
   {
     role: 'research helper',
@@ -61,7 +61,7 @@ const experiences = [
 ];
 
 export default function About() {
-  const profileImage = "https://images.unsplash.com/photo-1614492898637-435e0f87cef8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMGFzaWFuJTIwc3R1ZGVudHxlbnwxfHx8fDE3NzIzOTA0OTN8MA&ixlib=rb-4.1.0&q=80&w=1080";
+  const profileImage = "/ditto.gif";
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const [weeks, setWeeks] = useState<any[]>([]);
   const [hoveredDay, setHoveredDay] = useState<any | null>(null);
@@ -103,7 +103,7 @@ export default function About() {
               repeat: Infinity,
               ease: 'linear',
             }}
-            className="whitespace-nowrap font-mono text-sm text-white-400"
+            className="whitespace-nowrap font-mono text-sm text-green-400"
           >
             <span className="inline-block px-4">
               print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world")
@@ -131,13 +131,12 @@ export default function About() {
               <img
                 src={profileImage}
                 alt="kueh pang teng"
-                className="w-full aspect-square object-cover grayscale"
-              />
+                className="w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500"              />
             </motion.div>
           </div>
 
           {/* Bio Text */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -148,10 +147,9 @@ export default function About() {
                 i'm <span className="font-semibold">kueh pang teng</span> (郭)(湘婷) guō xiāng tíng.
               </p>
               <p className="text-[#B4B4B4] leading-relaxed">
-                i grew up fascinated by how machines could learn and think. that curiosity led me to AI, 
-                where i'm now exploring the intersection of code and data. 
-                when i'm not training models or debugging code, you'll find me listening to music, 
-                planning my next travel adventure, or journaling random thoughts.
+                i grew up fascinated by how machines could learn and think which led me to ai, and now exploring 
+                the intersection of code and data. when i'm not training models or debugging code, you'll find me 
+                listening to music, editing videos or journaling random thoughts.
               </p>
             </motion.div>
 
@@ -161,9 +159,6 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <h3 className="font-mono text-xs uppercase tracking-wider mb-4 border-b border-[#3A3A3A] pb-2 text-[#8E8E8E]">
-                contributions
-              </h3>
               <div className="bg-[#1a1a1a] p-6 border border-[#3A3A3A]">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="font-mono text-xs text-[#8E8E8E]">
@@ -179,20 +174,19 @@ export default function About() {
                   </a>
                 </div>
                 {/* GitHub Contribution Grid (real data) */}
-                <div className="w-full overflow-hidden">
-                  <div className="flex gap-1 overflow-x-auto max-w-full">
+                  <div className="w-full overflow-hidden">
                     {weeks.length === 0 ? (
-                      <div className="grid grid-cols-12 gap-1">
-                        {Array.from({ length: 84 }).map((_, i) => (
-                          <div
-                            key={i}
-                            className="aspect-square bg-white/5 transition-opacity"
-                            style={{ opacity: Math.random() > 0.7 ? 0.6 : 0.1 }}
-                          />
-                        ))}
-                      </div>
-                    ) : (
-                      weeks.map((week, wi) => (
+                    <div className="grid grid-cols-12 gap-1">
+                      {Array.from({ length: 84 }).map((_, i) => (
+                        <div
+                          key={i}
+                          className="aspect-square bg-white/5"
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex gap-1">
+                      {weeks.map((week: any, wi: number) => (
                         <div key={wi} className="flex flex-col gap-1">
                           {week.contributionDays.map((day: any) => (
                             <div
@@ -208,15 +202,18 @@ export default function About() {
                                 backgroundColor: getColor(day.contributionCount),
                                 borderRadius: 3,
                                 transition: 'transform 0.15s ease, box-shadow 0.15s ease',
-                                boxShadow: hoveredDay?.date === day.date ? '0 0 6px rgba(255,255,255,0.06)' : 'none',
+                                boxShadow:
+                                  hoveredDay?.date === day.date
+                                    ? '0 0 6px rgba(255,255,255,0.06)'
+                                    : 'none',
                               }}
                               className="hover:scale-125 cursor-pointer"
                             />
                           ))}
                         </div>
-                      ))
-                    )}
-                  </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Legend and hover info */}
@@ -226,7 +223,9 @@ export default function About() {
                       {hoveredDay.contributionCount} contributions on {hoveredDay.date}
                     </div>
                   ) : (
-                    <div className="text-xs text-[#8E8E8E]">hover a square for details</div>
+                    <div className="mt-4 text-center font-mono text-xs text-[#8E8E8E]">
+                      live updated · {new Date().toLocaleTimeString()}
+                    </div>
                   )}
                 </div>
               </div>
@@ -296,13 +295,15 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
             >
-              <a
-                href="#"
-                className="flex items-center justify-center gap-2 w-full py-3 bg-white text-black font-mono text-sm hover:bg-[#E0E0E0] transition-colors cursor-hover"
-              >
-                <Download size={16} />
-                <span>resume.pdf</span>
-              </a>
+            <a
+              href="https://docs.google.com/document/d/1jITWz0-vwzyKlS7l7Ziy-RMZJeYIDUt1z5T4BqBjXhA/preview"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 w-full py-3 bg-white text-black font-mono text-sm hover:bg-[#E0E0E0] transition-colors cursor-hover"
+            >
+              <Download size={16} />
+              <span>resume</span>
+            </a>
             </motion.div>
           </div>
 
