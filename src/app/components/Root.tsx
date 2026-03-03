@@ -19,7 +19,7 @@ export default function Root() {
       {/* Footer */}
       <footer className="py-8 text-center pr-20">
         <p className="font-mono text-xs text-[#8E8E8E]">
-          made with ♥ by pannteng © 2026 — all rights reserved
+          made with ♡ by pangteng © 2026 — all rights reserved
         </p>
       </footer>
 

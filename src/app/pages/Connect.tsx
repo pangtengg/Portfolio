@@ -44,10 +44,12 @@ export default function Connect() {
         >
           {/* HMU Title */}
           <div className="text-center space-y-4">
-            <h1 className="font-mono text-3xl text-white">hmu:</h1>
-            <p className="text-[#B4B4B4] max-w-md mx-auto">
-              let's connect! whether you want to collaborate on a project, discuss AI, or just say hi.
-            </p>
+            <h1 className="font-mono text-3xl text-white">let's connect :D</h1>
+              <p className="text-[#B4B4B4] max-w-md mx-auto">
+                ✉︎: <a href="mailto:tpkueh0404@gmail.com" 
+                  className="hover:underline"> tpkueh0404@gmail.com
+                </a>
+              </p>
           </div>
 
           {/* Elsewhere On - Social Media */}
@@ -62,7 +64,7 @@ export default function Connect() {
             </h3>
             <div className="flex justify-center items-center gap-6 flex-wrap">
               <a
-                href="https://linkedin.com"
+                href="linkedin.com/in/kueh-pang-teng"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-white hover:text-[#B4B4B4] transition-colors cursor-hover"
@@ -72,7 +74,7 @@ export default function Connect() {
               </a>
               <span className="text-[#3A3A3A]">|</span>
               <a
-                href="https://github.com"
+                href=" github.com/pangtengg"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-white hover:text-[#B4B4B4] transition-colors cursor-hover"
@@ -82,7 +84,7 @@ export default function Connect() {
               </a>
               <span className="text-[#3A3A3A]">|</span>
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/pangteng_"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-white hover:text-[#B4B4B4] transition-colors cursor-hover"
@@ -92,7 +94,7 @@ export default function Connect() {
               </a>
               <span className="text-[#3A3A3A]">|</span>
               <a
-                href="https://xiaohongshu.com"
+                href="https://xhslink.com/m/9XChJyYh3QN"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-white hover:text-[#B4B4B4] transition-colors cursor-hover"

@@ -1,0 +1,34 @@
+# Node modules
+node_modules/
+
+# Vite build output
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+/.pnp/
+.pnp.js
+
+# Mac system files
+.DS_Store
+
+# environment files
+.env
+.env.local
+.env.*.local
+
+# Python virtual environment
+venv/
+venva/
+
+# IDE/editor settings
+.vscode/
+.idea/
+
+# Others
+*.log
+npm-debug.log*

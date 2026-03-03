@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { ExternalLink, Download } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const skills = [
   { name: 'Python', icon: '🐍' },
@@ -27,39 +27,72 @@ const languages = [
 const education = [
   {
     school: 'multimedia university',
-    degree: 'BCS (hons) artificial intelligence',
+    degree: 'bachelor of computer science (hons) artificial intelligence',
     period: '2023 – 2026',
     location: 'melaka, malaysia',
   },
   {
     school: 'multimedia university',
-    degree: 'foundation in science',
+    degree: 'foundation in information technology',
     period: '2022 – 2023',
     location: 'melaka, malaysia',
+  },
+    {
+    school: 'smk infant jesus convent',
+    degree: 'spm 2021 (8a+ 1a)',
+    period: '2019 – 2022',
+    location: 'johor bahru, malaysia',
   },
 ];
 
 const experiences = [
   {
-    role: 'AI research intern',
-    company: 'tech innovations lab',
-    period: 'jan 2025 – present',
-    description: 'working on computer vision projects and ML model optimization',
+    role: 'full stack developer intern',
+    company: 'ifast global hub ai sdn bhd',
+    period: 'july 2025 - october 2025',
+    description: 'working on stocks and etf modules for fsmone, frontend revamp projects, prompt tuning for stella ai agent and building power bi dashboards',
   },
   {
-    role: 'web developer',
-    company: 'freelance',
-    period: '2023 – present',
-    description: 'building responsive web applications for local businesses',
+    role: 'research helper',
+    company: 'multimedia university',
+    period: 'jan 2024 - march 2024',
+    description: 'annotated 13,000+ different vehicle images using computer vision annotation tool for the smart-vetran project',
   },
 ];
 
 export default function About() {
   const profileImage = "https://images.unsplash.com/photo-1614492898637-435e0f87cef8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMGFzaWFuJTIwc3R1ZGVudHxlbnwxfHx8fDE3NzIzOTA0OTN8MA&ixlib=rb-4.1.0&q=80&w=1080";
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const [weeks, setWeeks] = useState<any[]>([]);
+  const [hoveredDay, setHoveredDay] = useState<any | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const apiUrl = '/api/github';
+        const res = await fetch(apiUrl);
+        const json = await res.json();
+
+        const weeksData = json?.data?.user?.contributionsCollection?.contributionCalendar?.weeks || [];
+        setWeeks(weeksData);
+      } catch (err) {
+        console.error('Failed to fetch GitHub contributions', err);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  function getColor(count: number) {
+    if (!count || count === 0) return '#0d1117';
+    if (count < 3) return '#2f3133';
+    if (count < 6) return '#5a5c5e';
+    if (count < 10) return '#858687';
+    return '#ffffff';
+  }
 
   return (
-    <div className="min-h-screen pt-12 pb-16 px-4">
+    <div className="min-h-screen pt-12 pb-16 px-4 md:pr-24">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Infinite Scrolling Python Code */}
         <div className="overflow-hidden bg-[#0D1117] border border-[#3A3A3A] py-4">
@@ -70,7 +103,7 @@ export default function About() {
               repeat: Infinity,
               ease: 'linear',
             }}
-            className="whitespace-nowrap font-mono text-sm text-green-400"
+            className="whitespace-nowrap font-mono text-sm text-white-400"
           >
             <span className="inline-block px-4">
               print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world") &nbsp;&nbsp;&nbsp;&nbsp; print("hello world")
@@ -86,7 +119,7 @@ export default function About() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
-          className="grid md:grid-cols-[300px_1fr] gap-8"
+          className="grid md:grid-cols-[300px_minmax(0,1fr)] gap-8"
         >
           {/* Profile Photo - No Frame */}
           <div>
@@ -116,7 +149,7 @@ export default function About() {
               </p>
               <p className="text-[#B4B4B4] leading-relaxed">
                 i grew up fascinated by how machines could learn and think. that curiosity led me to AI, 
-                where i'm now exploring the intersection of code, data, and intelligent systems. 
+                where i'm now exploring the intersection of code and data. 
                 when i'm not training models or debugging code, you'll find me listening to music, 
                 planning my next travel adventure, or journaling random thoughts.
               </p>
@@ -134,7 +167,7 @@ export default function About() {
               <div className="bg-[#1a1a1a] p-6 border border-[#3A3A3A]">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="font-mono text-xs text-[#8E8E8E]">
-                    i make it, occasionally, in apps
+                    github contributions
                   </span>
                   <a
                     href="https://github.com"
@@ -145,17 +178,56 @@ export default function About() {
                     <ExternalLink size={16} className="text-[#8E8E8E]" />
                   </a>
                 </div>
-                {/* GitHub Contribution Grid */}
-                <div className="grid grid-cols-12 gap-1">
-                  {Array.from({ length: 84 }).map((_, i) => (
-                    <div
-                      key={i}
-                      className="aspect-square bg-white hover:bg-white/60 transition-opacity"
-                      style={{
-                        opacity: Math.random() > 0.7 ? 0.6 : 0.1,
-                      }}
-                    />
-                  ))}
+                {/* GitHub Contribution Grid (real data) */}
+                <div className="w-full overflow-hidden">
+                  <div className="flex gap-1 overflow-x-auto max-w-full">
+                    {weeks.length === 0 ? (
+                      <div className="grid grid-cols-12 gap-1">
+                        {Array.from({ length: 84 }).map((_, i) => (
+                          <div
+                            key={i}
+                            className="aspect-square bg-white/5 transition-opacity"
+                            style={{ opacity: Math.random() > 0.7 ? 0.6 : 0.1 }}
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      weeks.map((week, wi) => (
+                        <div key={wi} className="flex flex-col gap-1">
+                          {week.contributionDays.map((day: any) => (
+                            <div
+                              key={day.date}
+                              onMouseEnter={() => setHoveredDay(day)}
+                              onMouseLeave={() => setHoveredDay(null)}
+                              role="img"
+                              aria-label={`${day.contributionCount} contributions on ${day.date}`}
+                              title={`${day.contributionCount} contributions on ${day.date}`}
+                              style={{
+                                width: 14,
+                                height: 14,
+                                backgroundColor: getColor(day.contributionCount),
+                                borderRadius: 3,
+                                transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+                                boxShadow: hoveredDay?.date === day.date ? '0 0 6px rgba(255,255,255,0.06)' : 'none',
+                              }}
+                              className="hover:scale-125 cursor-pointer"
+                            />
+                          ))}
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+
+                {/* Legend and hover info */}
+                <div className="mt-4 flex items-center gap-4">
+                  {hoveredDay ? (
+                    <div className="text-xs text-white bg-neutral-800 px-3 py-1 rounded-md">
+                      {hoveredDay.contributionCount} contributions on {hoveredDay.date}
+                    </div>
+                  ) : (
+                    <div className="text-xs text-[#8E8E8E]">hover a square for details</div>
+                  )}
                 </div>
               </div>
             </motion.div>
