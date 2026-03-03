@@ -1,9 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Github, ExternalLink, X } from 'lucide-react';
-import Slider from 'react-slick';
-import 'react-slick/slick/slick.css';
-import 'react-slick/slick/slick-theme.css';
+import { Github, ExternalLink, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const featuredProjects = [
   {
@@ -59,19 +56,44 @@ const otherProjects = [
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
 
   const selectedProjectData = featuredProjects.find((p) => p.id === selectedProject);
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 1000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    pauseOnHover: true,
-    cssEase: 'ease-in-out',
+  // Auto-advance carousel
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDirection(1);
+      setCurrentIndex((prev) => (prev + 1) % featuredProjects.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const handlePrevious = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + featuredProjects.length) % featuredProjects.length);
+  };
+
+  const handleNext = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % featuredProjects.length);
+  };
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+    }),
   };
 
   return (
@@ -93,33 +115,33 @@ export default function Projects() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="carousel-container"
+          className="relative overflow-hidden"
         >
-          <style>{`
-            .slick-dots li button:before {
-              color: #8E8E8E;
-            }
-            .slick-dots li.slick-active button:before {
-              color: #FFFFFF;
-            }
-            .slick-prev:before,
-            .slick-next:before {
-              color: #FFFFFF;
-            }
-          `}</style>
-          <Slider {...sliderSettings}>
-            {featuredProjects.map((project) => (
-              <div key={project.id} className="px-2">
+          <div className="relative h-[500px] md:h-[600px]">
+            <AnimatePresence initial={false} custom={direction}>
+              <motion.div
+                key={currentIndex}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: 'spring', stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.2 },
+                }}
+                className="absolute w-full"
+              >
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  onClick={() => setSelectedProject(project.id)}
+                  onClick={() => setSelectedProject(featuredProjects[currentIndex].id)}
                   className="bg-[#1a1a1a] border-2 border-[#3A3A3A] overflow-hidden cursor-pointer hover:border-white transition-all cursor-hover"
                 >
                   {/* Image */}
                   <div className="aspect-video overflow-hidden bg-[#0D1117]">
                     <img
-                      src={project.image}
-                      alt={project.title}
+                      src={featuredProjects[currentIndex].image}
+                      alt={featuredProjects[currentIndex].title}
                       className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
                     />
                   </div>
@@ -127,13 +149,15 @@ export default function Projects() {
                   {/* Content */}
                   <div className="p-6 space-y-4">
                     <div className="flex items-start justify-between">
-                      <h3 className="font-semibold text-xl text-white">#{project.id} {project.title}</h3>
+                      <h3 className="font-semibold text-xl text-white">
+                        #{featuredProjects[currentIndex].id} {featuredProjects[currentIndex].title}
+                      </h3>
                     </div>
-                    <p className="text-sm text-[#B4B4B4]">{project.summary}</p>
+                    <p className="text-sm text-[#B4B4B4]">{featuredProjects[currentIndex].summary}</p>
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
+                      {featuredProjects[currentIndex].tags.map((tag) => (
                         <span
                           key={tag}
                           className="px-3 py-1 bg-[#2B2B2B] border border-[#3A3A3A] font-mono text-xs text-white"
@@ -146,7 +170,7 @@ export default function Projects() {
                     {/* Links */}
                     <div className="flex gap-4 pt-2">
                       <a
-                        href={project.github}
+                        href={featuredProjects[currentIndex].github}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-1 text-sm font-mono hover:text-white transition-colors cursor-hover text-[#B4B4B4]"
@@ -156,7 +180,7 @@ export default function Projects() {
                         code
                       </a>
                       <a
-                        href={project.demo}
+                        href={featuredProjects[currentIndex].demo}
                         className="flex items-center gap-1 text-sm font-mono hover:text-white transition-colors cursor-hover text-[#B4B4B4]"
                         onClick={(e) => e.stopPropagation()}
                       >
@@ -166,9 +190,39 @@ export default function Projects() {
                     </div>
                   </div>
                 </motion.div>
-              </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Navigation Buttons */}
+          <button
+            onClick={handlePrevious}
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 p-3 rounded-full cursor-hover transition-colors"
+          >
+            <ChevronLeft size={24} className="text-white" />
+          </button>
+          <button
+            onClick={handleNext}
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 p-3 rounded-full cursor-hover transition-colors"
+          >
+            <ChevronRight size={24} className="text-white" />
+          </button>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center gap-2 mt-6">
+            {featuredProjects.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setDirection(index > currentIndex ? 1 : -1);
+                  setCurrentIndex(index);
+                }}
+                className={`w-2 h-2 rounded-full transition-all cursor-hover ${
+                  index === currentIndex ? 'bg-white w-8' : 'bg-[#3A3A3A]'
+                }`}
+              />
             ))}
-          </Slider>
+          </div>
         </motion.div>
 
         {/* Other Projects List */}
