@@ -99,7 +99,7 @@ export default function Connect() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-white hover:text-[#B4B4B4] transition-colors cursor-hover"
               >
-                <span className="text-xl">📕</span>
+                <span className="text-xl">🕮</span>
                 <span className="text-sm font-mono">xiaohongshu</span>
               </a>
             </div>
