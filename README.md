@@ -73,9 +73,7 @@ Routing is configured in `src/app/routes.ts`.
 - Tailwind configuration lives in `src/app/styles/` and the root CSS files (`index.css`, `theme.css`).
 - The `guidelines/` directory contains internal documentation and design notes.
 
-## License
+## Vercel deployment
 
-This is a private portfolio; no license is specified.
+https://pangtengg.vercel.app/
 
-
-Feel free to update this readme as the project evolves.  
