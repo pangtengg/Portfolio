@@ -4,8 +4,7 @@ import { Link } from 'react-router'
 import { ArrowRight } from 'lucide-react'
 
 export default function Home() {
-  const profileImage =
-    "https://images.unsplash.com/photo-1614492898637-435e0f87cef8?..."
+  const profileImage = "/pfp.jpg"
 
   return (
     <div className="min-h-screen px-4 md:pr-24 relative overflow-hidden pt-20 pb-24">

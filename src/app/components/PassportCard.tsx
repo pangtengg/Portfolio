@@ -58,7 +58,7 @@ export function PassportCard({ profileImage }: PassportCardProps) {
                 <img
                   src={profileImage}
                   alt="kueh pang teng"
-                  className="w-[130px] h-[160px] object-cover grayscale"
+                  className="w-[130px] h-[160px] object-cover grayscale hover:grayscale-0 transition-all duration-300"
                   style={{ display: 'block' }}
                 />
               </div>
