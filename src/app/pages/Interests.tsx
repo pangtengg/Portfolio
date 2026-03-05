@@ -43,19 +43,14 @@ const travelLocations = [
 
 const thoughts = [
   {
-    title: 'on learning AI',
-    date: '15/02/2026',
-    content: 'every day i learn something new about neural networks, and every day i realize how much more there is to learn. the field is vast, and that\'s what makes it exciting.',
+    title: 'kindness',
+    date: '06/03/2026',
+    content: 'i would like to relate to a chinese saying i grew up with <人之初，性本善。性相近，習相遠。> from three characteristics classic (三字經) which means all men are born with good and similar nature. it is through the environment that shapes our personalities and behaviours. it led me thinking how really the society plays and works really changes our mindsets and perceptions on wealth, material possessions, and the pursuit of happiness. for me kindness means the willingness to help someone when theyre in need which should be the instinct of men but now i dont understand why theres probably ww3 in the near future and people are bombing each other. i dont really understand why we operate the world like this or how to this extent that this world has been operated. idk what im talking about anyways ill always stand by kindness breaks rocks and melts hearts happy friday!',
   },
   {
-    title: 'coffee & code',
-    date: '28/01/2026',
-    content: 'there\'s something meditative about debugging code at 2 AM with a cup of coffee. it\'s just you, the problem, and the solution somewhere in between.',
-  },
-  {
-    title: 'travel plans',
-    date: '10/01/2026',
-    content: 'planning my next trip to japan. can\'t wait to explore tokyo\'s tech scene and experience the perfect blend of tradition and innovation.',
+    title: 'im 22',
+    date: '01/03/2026',
+    content: 'ive came to realised that time does really flies, life is impermanent and im still unsure (quoting who knows by daniel caesar: is it a crime to be unsure) what my mission on earth and why do i live :D',
   },
 ];
 
