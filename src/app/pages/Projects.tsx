@@ -65,7 +65,7 @@ export default function Projects() {
   useEffect(() => {
     const timer = setInterval(() => {
       setDirection(1);
-      setCurrentIndex((prev) => (prev + 1) % featuredProjects.length);
+      setCurrentIndex((prev) => (prev + 2) % featuredProjects.length);
     }, 5000);
 
     return () => clearInterval(timer);
@@ -73,17 +73,17 @@ export default function Projects() {
 
   const handlePrevious = () => {
     setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + featuredProjects.length) % featuredProjects.length);
+    setCurrentIndex((prev) => (prev - 2 + featuredProjects.length) % featuredProjects.length);
   };
 
   const handleNext = () => {
     setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % featuredProjects.length);
+    setCurrentIndex((prev) => (prev + 2) % featuredProjects.length);
   };
 
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
+      x: direction > 0 ? 300 : -300,
       opacity: 0,
     }),
     center: {
@@ -91,7 +91,7 @@ export default function Projects() {
       opacity: 1,
     },
     exit: (direction: number) => ({
-      x: direction < 0 ? 1000 : -1000,
+      x: direction < 0 ? 300 : -300,
       opacity: 0,
     }),
   };
@@ -104,8 +104,8 @@ export default function Projects() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <h1 className="font-serif text-4xl mb-2 text-white">projects</h1>
-          <p className="font-mono text-sm text-[#8E8E8E]">
+          <h1 className="font-serif text-4xl mb-2 text-white text-center">projects</h1>
+          <p className="font-mono text-sm text-[#8E8E8E] text-center">
             things i've built and learned from
           </p>
         </motion.div>
@@ -117,7 +117,7 @@ export default function Projects() {
           transition={{ delay: 0.2 }}
           className="relative overflow-hidden"
         >
-          <div className="relative h-[500px] md:h-[600px]">
+          <div className="relative px-16">
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={currentIndex}
@@ -130,66 +130,73 @@ export default function Projects() {
                   x: { type: 'spring', stiffness: 300, damping: 30 },
                   opacity: { duration: 0.2 },
                 }}
-                className="absolute w-full"
+                className="grid grid-cols-1 md:grid-cols-2 gap-6"
               >
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  onClick={() => setSelectedProject(featuredProjects[currentIndex].id)}
-                  className="bg-[#1a1a1a] border-2 border-[#3A3A3A] overflow-hidden cursor-pointer hover:border-white transition-all cursor-hover"
-                >
-                  {/* Image */}
-                  <div className="aspect-video overflow-hidden bg-[#0D1117]">
-                    <img
-                      src={featuredProjects[currentIndex].image}
-                      alt={featuredProjects[currentIndex].title}
-                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
-                    />
-                  </div>
+                {[0, 1].map((offset) => {
+                  const projectIndex = (currentIndex + offset) % featuredProjects.length;
+                  const project = featuredProjects[projectIndex];
+                  return (
+                    <motion.div
+                      key={project.id}
+                      whileHover={{ scale: 1.02 }}
+                      onClick={() => setSelectedProject(project.id)}
+                      className="bg-[#1a1a1a] border-2 border-[#3A3A3A] overflow-hidden cursor-pointer hover:border-white transition-all cursor-hover"
+                    >
+                      {/* Image */}
+                      <div className="aspect-video overflow-hidden bg-[#0D1117]">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
+                        />
+                      </div>
 
-                  {/* Content */}
-                  <div className="p-6 space-y-4">
-                    <div className="flex items-start justify-between">
-                      <h3 className="font-semibold text-xl text-white">
-                        #{featuredProjects[currentIndex].id} {featuredProjects[currentIndex].title}
-                      </h3>
-                    </div>
-                    <p className="text-sm text-[#B4B4B4]">{featuredProjects[currentIndex].summary}</p>
+                      {/* Content */}
+                      <div className="p-6 space-y-4">
+                        <div className="flex items-start justify-between">
+                          <h3 className="font-semibold text-xl text-white">
+                            #{project.id} {project.title}
+                          </h3>
+                        </div>
+                        <p className="text-sm text-[#B4B4B4]">{project.summary}</p>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {featuredProjects[currentIndex].tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 bg-[#2B2B2B] border border-[#3A3A3A] font-mono text-xs text-white"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                        {/* Tags */}
+                        <div className="flex flex-wrap gap-2">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-3 py-1 bg-[#2B2B2B] border border-[#3A3A3A] font-mono text-xs text-white"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
 
-                    {/* Links */}
-                    <div className="flex gap-4 pt-2">
-                      <a
-                        href={featuredProjects[currentIndex].github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-sm font-mono hover:text-white transition-colors cursor-hover text-[#B4B4B4]"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Github size={14} />
-                        code
-                      </a>
-                      <a
-                        href={featuredProjects[currentIndex].demo}
-                        className="flex items-center gap-1 text-sm font-mono hover:text-white transition-colors cursor-hover text-[#B4B4B4]"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <ExternalLink size={14} />
-                        demo
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
+                        {/* Links */}
+                        <div className="flex gap-4 pt-2">
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1 text-sm font-mono hover:text-white transition-colors cursor-hover text-[#B4B4B4]"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <Github size={14} />
+                            code
+                          </a>
+                          <a
+                            href={project.demo}
+                            className="flex items-center gap-1 text-sm font-mono hover:text-white transition-colors cursor-hover text-[#B4B4B4]"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <ExternalLink size={14} />
+                            demo
+                          </a>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </motion.div>
             </AnimatePresence>
           </div>
