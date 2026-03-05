@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Github, Linkedin, Send, Instagram } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 export default function Connect() {
+  const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,21 +12,39 @@ export default function Connect() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError('');
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const result = await emailjs.send(
+        'service_zur4gae',
+        'template_y15413x',
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        'qgKnK0EGe6WxI4wWF'
+      );
+
+      if (result.text === 'OK') {
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 3000);
+      } else {
+        setError('Failed to send message. Please try again.');
+      }
+    } catch (err) {
+      setError('Failed to send message. Please try again.');
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 3000);
-    }, 1000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -116,7 +136,7 @@ export default function Connect() {
               send me a message
             </h3>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               {/* Name Field */}
               <div className="space-y-2">
                 <label htmlFor="name" className="block font-mono text-xs uppercase text-[#8E8E8E]">
@@ -164,6 +184,11 @@ export default function Connect() {
                   className="w-full px-0 py-2 border-b border-[#3A3A3A] bg-transparent focus:outline-none focus:border-white transition-colors resize-none text-white"
                 />
               </div>
+
+              {/* Error Message */}
+              {error && (
+                <p className="text-red-400 text-sm font-mono text-center">{error}</p>
+              )}
 
               {/* Submit Button */}
               <div className="relative">
