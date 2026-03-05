@@ -16,61 +16,30 @@ const PERSONAL_HITS = [
 ]
 
 const travelLocations = [
-    {
-    name: 'japan',
-    photos: [
-      'https://images.unsplash.com/photo-1691459841469-87e136cbaa27?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0b2t5byUyMHNoaWJ1eWElMjBzdHJlZXR8ZW58MXx8fHwxNzcyMzkwNjAyfDA&ixlib=rb-4.1.0&q=80&w=1080',
-      'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800',
-      'https://images.unsplash.com/photo-1513407030348-c983a97b98d8?w=800',
-    ],
+  {
+    name: "japan",
+    folder: 'jpn',
+    photos: Array.from({ length: 10 }, (_, i) => `/jpn/jpn${i + 1}.jpg`),
   },
   {
-    name: 'sydney',
-    photos: [
-      'https://images.unsplash.com/photo-1523059623039-a9ed027e7fad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzeWRuZXklMjBvcGVyYSUyMGhvdXNlfGVufDF8fHx8MTc3MjM0ODk1N3ww&ixlib=rb-4.1.0&q=80&w=1080',
-      'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800',
-      'https://images.unsplash.com/photo-1624138784614-87fd1b6528f8?w=800',
-    ],
+    name: "sydney",
+    folder: 'syd',
+    photos: Array.from({ length: 13 }, (_, i) => `/syd/syd${i + 1}.jpg`),
   },
   {
-    name: 'melbourne',
-    photos: [
-      'https://images.unsplash.com/photo-1523059623039-a9ed027e7fad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzeWRuZXklMjBvcGVyYSUyMGhvdXNlfGVufDF8fHx8MTc3MjM0ODk1N3ww&ixlib=rb-4.1.0&q=80&w=1080',
-      'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800',
-      'https://images.unsplash.com/photo-1624138784614-87fd1b6528f8?w=800',
-    ],
+    name: "melbourne",
+    folder: 'mel',
+    photos: Array.from({ length: 10 }, (_, i) => `/mel/mel${i + 1}.jpg`),
   },
   {
-    name: 'taipei',
-    photos: [
-      'https://images.unsplash.com/photo-1662720262802-91f9373dcac6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YWlwZWklMjAxMDElMjBuaWdodHxlbnwxfHx8fDE3NzIzNTU5OTN8MA&ixlib=rb-4.1.0&q=80&w=1080',
-      'https://images.unsplash.com/photo-1533005607259-f8c29710f23d?w=800',
-      'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=800',
-    ],
+    name: "seoul",
+    folder: 'sel',
+    photos: Array.from({ length: 2 }, (_, i) => `/sel/sel${i + 1}.jpg`),
   },
   {
-    name: 'shanghai',
-    photos: [
-      'https://images.unsplash.com/photo-1628308868241-29539fb51fa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZW91bCUyMGtvcmVhJTIwaGFub2t8ZW58MXx8fHwxNzcyMzkwNjAzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-      'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800',
-      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800',
-    ],
-  },
-  {
-    name: 'korea',
-    photos: [
-      'https://images.unsplash.com/photo-1628308868241-29539fb51fa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZW91bCUyMGtvcmVhJTIwaGFub2t8ZW58MXx8fHwxNzcyMzkwNjAzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-      'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800',
-      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800',
-    ],
-  },
-    {
-    name: 'beijing',
-    photos: [
-      'https://images.unsplash.com/photo-1628308868241-29539fb51fa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZW91bCUyMGtvcmVhJTIwaGFub2t8ZW58MXx8fHwxNzcyMzkwNjAzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-      'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800',
-      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800',
-    ],
+    name: "shanghai",
+    folder: 'sha',
+    photos: Array.from({ length: 4 }, (_, i) => `/sha/sha${i + 1}.jpg`),
   },
 ];
 
@@ -116,7 +85,7 @@ export default function Interests() {
         >
           <h1 className="font-serif text-4xl mb-2 text-white text-center">all time favourites!</h1>
           <p className="font-mono text-sm text-[#8E8E8E] text-center">
-            that kept me alive
+            that keeps me alive
           </p>
       </motion.h1>
 
@@ -127,7 +96,9 @@ export default function Interests() {
         transition={{ duration: 0.6 }}
         className="mb-12"
       >
-        <h2 className="font-serif text-2xl text-white">music</h2>
+          <div className="flex items-center gap-3">
+            <h2 className="font-mono text-sm uppercase tracking-wider text-[#8E8E8E]">🎧 music</h2>
+          </div>
       </motion.div>
 
       {/* Main layout */}
@@ -216,14 +187,13 @@ export default function Interests() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="space-y-8"
+          className="space-y-8 mt-16"
         >
           <div className="flex items-center gap-3">
-            <MapPin size={24} className="text-white" />
-            <h2 className="font-mono text-sm uppercase tracking-wider text-[#8E8E8E]">postcards</h2>
+            <h2 className="font-mono text-sm uppercase tracking-wider text-[#8E8E8E]">⚲ postcards</h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8">
             {travelLocations.map((location, idx) => (
               <motion.div
                 key={location.name}
@@ -235,7 +205,7 @@ export default function Interests() {
                 className="relative bg-[#2B2B2B] border border-[#3A3A3A] p-6 pb-12 cursor-pointer hover:border-white transition-all cursor-hover"
               >
                 {/* Folder Tab */}
-                <div className="absolute -top-3 left-4 bg-[#2B2B2B] border border-[#3A3A3A] border-b-0 px-4 py-1 font-mono text-xs text-white">
+                <div className="absolute -top-3 left-4 bg-[#2B2B2B] border border-[#3A3A3A] border-b-0 px-4 py-1 font-mono text-xs text-white whitespace-nowrap">
                   {location.name}
                 </div>
 
@@ -253,9 +223,9 @@ export default function Interests() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="space-y-8"
+          className="space-y-8 mt-16"
         >
-          <h2 className="font-mono text-sm uppercase tracking-wider text-[#8E8E8E]">thoughts</h2>
+          <h2 className="font-mono text-sm uppercase tracking-wider text-[#8E8E8E]">✎ᝰ thoughts</h2>
 
           <div className="space-y-1">
             {thoughts.map((thought, idx) => (
@@ -314,7 +284,7 @@ export default function Interests() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center mb-8">
-                <h2 className="font-serif text-3xl capitalize text-white">{selectedLocation}</h2>
+                <h2 className="font-serif text-3xl text-white">{selectedLocation}'s archive</h2>
                 <button
                   onClick={() => setSelectedLocation(null)}
                   className="p-2 hover:bg-white/10 rounded cursor-hover"
@@ -323,19 +293,21 @@ export default function Interests() {
                 </button>
               </div>
 
-              {/* Mood Board - Raw Images */}
-              <Masonry columnsCount={3} gutter="16px">
+              {/* Mood Board - Masonry Layout */}
+              <Masonry columnsCount={3} gutter="8px">
                 {selectedLocationData.photos.map((photo, idx) => (
                   <motion.div
                     key={idx}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: idx * 0.1 }}
+                    transition={{ delay: idx * 0.05 }}
+                    className="break-inside-avoid mb-2"
                   >
                     <img
                       src={photo}
                       alt={`${selectedLocation} ${idx + 1}`}
-                      className="w-full h-auto"
+                      className="w-full h-auto block"
+                      loading="lazy"
                     />
                   </motion.div>
                 ))}
