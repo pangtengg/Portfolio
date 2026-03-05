@@ -7,10 +7,8 @@ import { RecordPlayer } from '../components/RecordPlayer';
 const PERSONAL_HITS = [
   { id: '2C5nlzIMJ81NYmeGhofNNP' },
   { id: '0XWf8CRB6IptewumZDi5b6' },
-  { id: '5hQSXkFgbxjZo9uCwd11so' },
   { id: '1XGmzt0PVuFgQYYnV2It7A' },
   { id: '3AJwUDP919kvQ9QcozQPxg' },
-  { id: '4zRZAmBQP8vhNPf9i9opXt' },
   { id: '2262bWmqomIaJXwCRHr13j' },
   { id: '4wVduR10VslHbDO60hTZhm' },
 ]
@@ -169,14 +167,31 @@ export default function Interests() {
             ))}
           </div>
 
-          {/* Fav artists placeholder */}
-          <div
-            className="mt-10 border border-dashed border-[#2A2A2A] p-6 text-center"
-            style={{ borderRadius: '4px' }}
-          >
-            <p className="font-mono text-[10px] tracking-[0.3em] text-[#333] uppercase">
-              favourite artists — coming soon
+          {/* Favourite Artist & Album */}
+          <div className="mt-10 space-y-4">
+            <p className="font-mono text-[9px] tracking-[0.4em] text-[#555] uppercase">
+              favourite artist & album
             </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <iframe
+                src="https://open.spotify.com/embed/artist/3pc0bOVB5whxmD50W79wwO?utm_source=generator&theme=0"
+                width="100%"
+                height="80"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                style={{ borderRadius: '4px' }}
+              />
+              <iframe
+                src="https://open.spotify.com/embed/album/6cbwstHlsAIIWurIIXXBPd?utm_source=generator&theme=0"
+                width="100%"
+                height="80"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                style={{ borderRadius: '4px' }}
+              />
+            </div>
           </div>
         </div>
 
