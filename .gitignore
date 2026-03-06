@@ -20,6 +20,7 @@ yarn-error.log*
 .env
 .env.local
 .env.*.local
+.qoder
 
 # Python virtual environment
 venv/
