@@ -129,7 +129,7 @@ export function PassportCard({ profileImage }: PassportCardProps) {
 
             {/* Signature line */}
             <div className="font-mono text-[9px] tracking-[0.4em] text-[#444]">
-              fav quote
+              quote
             </div>
 
           </div>
