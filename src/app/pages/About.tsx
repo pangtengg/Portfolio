@@ -39,7 +39,7 @@ const education = [
   },
     {
     school: 'smk infant jesus convent',
-    degree: 'spm 2021 (8a+ 1a)',
+    degree: 'spm 2021',
     period: '2019 – 2022',
     location: 'johor bahru, malaysia',
   },

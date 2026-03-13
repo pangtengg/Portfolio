@@ -3,49 +3,11 @@ import { motion } from 'motion/react';
 import { Link } from 'react-router';
 import { StarField } from '../components/Starfield';
 
-const ASCII_ART = `
-                        .:--==++***##%%%##+=-:..
-                    .:=*#%%%%%%%%%%%%%%%%%%#****+=-:.
-                  :=*##%%%%%%%%%%%%%%%%%%%%%%%%%%%#***+=:
-                -*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#***+=
-              .*%%%##%##%%##%####%##%%#%##%###%%#%%%%%#**+-
-            +%%%%%###%###%##%###%####%##%####%#%#%%%%%#**=
-            *%%%%%##%#####%##%###%####%##%%###%##%#%%%%%#*+
-          +%%%%%###%####%##%####%####%##%####%##%%#%%%%%#+
-          =%%####%##%##%%####%###%####%##%###%####%##%%%%#*
-          #%#%##%###%%##%##%%###%####%####%##%##%%##%####%+
-        :%###%##%##%#%##%###%###%##%#####%##%###%##%##%%#-
-        +%###%#%##%##%###%##%%##%##%####%###%##%##%####%%-
-        *%###%##%###%##%###%%##%####%##%###%###%###%%%##%+
-        #%##%##%####%##%###%##%####%####%###%##%###%%%%#%+
-        #%##%###%###%###%##%###%####%###%##%####%###%%%#%-
-        +%##%###%##%####%##%##%#####%##%###%##%##%###%%#*
-        :%##%##%###%##%###%#%%###%##%##%###%##%###%%##%#*
-          +%##%###%##%##%###%%##%#%##%##%###%%#%##%##%##*
-          =#%%##%###%##%##%##%##%##%###%###%##%##%####*-
-            :*%##%###%%##%###%%##%###%##%##%###%##%###*=.
-              :+%##%###%%##%###%%##%###%##%##%####%*=.
-        .....  .-*%%##%###%##%###%##%###%%###%%*=.
-        :#%##%##*=: :=+#%###%##%###%##%###%%*=:
-      .*%###%##%##*+=-:.:-=+*#####%%%#*+=-.
-      +%####%%##%####%#**+=====+**+=:.
-      .#%####%####%%##%####%%%##*+-.
-      =%#####%####%%##%#####%%#+:
-      *%##%###%###%##%###%##%%+
-      +%##%###%####%###%###%##
-      -%%###%###%##%###%###%%*
-      *%###%##%##%###%%%##%-
-      .+%###%##%%##%###%%##*
-        :=*%##%##%##%%%#*=.
-            .:--====--:.
-`;
-
 const PASSPORT_ROWS = [
   { key: 'name', val: 'kueh pang teng', accent: false },
-  { key: 'currently', val: 'ai major @ mmu melaka', accent: true },
+  { key: 'currently', val: 'final sem ai major @ mmu melaka', accent: true },
   { key: 'aspiration', val: 'aspiring ai developer', accent: false },
   { key: 'based in', val: 'johor bahru, malaysia', accent: false },
-  { key: 'updated', val: '03 march 2026', accent: false },
 ];
 
 export default function Home() {
@@ -53,9 +15,6 @@ export default function Home() {
 
   const navLinks = [
     { label: 'about me →', to: '/about', primary: true },
-    { label: 'projects', to: '/projects', primary: false },
-    { label: 'interests', to: '/interests', primary: false },
-    { label: 'connect', to: '/connect', primary: false },
   ];
 
   return (
@@ -110,20 +69,39 @@ export default function Home() {
 
           {/* Address Bar */}
           <div className="flex-1 max-w-md mx-auto">
-            <div className="h-7 bg-[#111] border border-[#333] rounded-md flex items-center justify-center gap-2 text-xs text-[#888]">
+            <div className="h-7 bg-[#1a1a1a] border border-[#333] rounded-md flex items-center justify-between px-3 text-xs text-[#888]">
+              {/* Tab icon on left */}
+              <svg className="w-3.5 h-3.5 text-[#666]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" />
+                <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" />
+              </svg>
+              {/* Empty center */}
+              <span></span>
+              {/* Refresh icon on right */}
+              <span className="text-[#666] text-sm">↻</span>
             </div>
           </div>
 
           {/* Nav Icons */}
-          <div className="flex gap-4 text-[#555] text-sm">
-            <span>⟵</span>
-            <span>⟶</span>
-            <span>↻</span>
+          <div className="flex gap-4 text-[#666] text-sm items-center">
+            {/* Share icon */}
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+            </svg>
+            {/* Add tab icon */}
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            {/* Sidebar icon */}
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth={1.5} />
+              <line x1="9" y1="3" x2="9" y2="21" stroke="currentColor" strokeWidth={1.5} />
+            </svg>
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-8 md:p-12 grid grid-cols-1 md:grid-cols-[320px_1fr] gap-10 md:gap-14">
+        <div className="p-8 md:p-12 grid grid-cols-1 md:grid-cols-[0.8fr_1.2fr] gap-8 md:gap-10 max-w-4xl mx-auto">
           {/* ASCII Panel */}
           <motion.div
             initial={{ opacity: 0, filter: 'blur(4px)' }}
@@ -131,9 +109,11 @@ export default function Home() {
             transition={{ duration: 1.2, delay: 0.3 }}
             className="relative"
           >
-            <pre className="text-[3.5px] md:text-[4px] leading-[1.1] text-[#5a5a5a] whitespace-pre font-mono tracking-wider select-none">
-              {ASCII_ART}
-            </pre>
+            <img
+              src="/pfp.gif"
+              alt="ASCII Portrait"
+              className="w-full h-auto object-contain opacity-90"
+            />
             {/* Fade overlay at bottom */}
             <div
               className="absolute inset-0 pointer-events-none"
@@ -151,20 +131,20 @@ export default function Home() {
             className="flex flex-col justify-center gap-7"
           >
             {/* Passport Card */}
-            <div className="bg-white/[0.02] border border-[#333] rounded-lg p-5 relative">
+            <div className="bg-white/[0.02] border border-[#333] rounded-lg p-6 relative">
               {/* Header */}
-              <div className="absolute -top-px left-1/2 -translate-x-1/2 bg-[#141414] px-3 text-[8px] text-[#555] tracking-[0.15em] uppercase font-mono whitespace-nowrap">
+              <div className="absolute -top-px left-1/2 -translate-x-1/2 bg-[#141414] px-3 text-[10px] text-[#555] tracking-[0.15em] uppercase font-mono whitespace-nowrap">
                 ── PASSEPORT DU DEVELOPPEUR ──
               </div>
 
               {/* Rows */}
-              <div className="mt-2 space-y-1">
+              <div className="mt-4 space-y-2">
                 {PASSPORT_ROWS.map(({ key, val, accent }) => (
                   <div
                     key={key}
-                    className="grid grid-cols-[90px_1fr] gap-2 py-1 border-b border-white/[0.04] text-[11px] font-mono"
+                    className="grid grid-cols-[100px_1fr] gap-3 py-2 border-b border-white/[0.06] text-[13px] font-mono"
                   >
-                    <span className="text-[#555] text-[10px] tracking-wider">{key}</span>
+                    <span className="text-[#555] text-[12px] tracking-wider">{key}</span>
                     <span className="text-[#e8e8e8]">
                       {accent ? (
                         <>
@@ -180,23 +160,17 @@ export default function Home() {
 
               {/* MRZ */}
               <p className="mt-3 text-[8px] text-[#2a2a2a] tracking-[0.08em] font-mono break-all">
-                {'<<<IMPTYEAHH<<KUEHPANGTENG<<<<<<<'}
-                <br />
-                {'<<<<904APR94<MYS0101011M26830151<<<'}
+                {'<<<IMPTYEAHH<<KUEHPANGTENG<<<<<<<<<<<04APR04<MYS0101011M26830151<<<'}
               </p>
             </div>
 
             {/* Nav Links */}
-            <div className="flex flex-wrap gap-2">
-              {navLinks.map(({ label, to, primary }) => (
+            <div className="flex justify-center">
+              {navLinks.map(({ label, to }) => (
                 <Link
                   key={label}
                   to={to}
-                  className={`px-4 py-2 text-[10px] uppercase tracking-[0.15em] rounded border transition-all font-mono ${
-                    primary
-                      ? 'bg-[#4a9eff]/10 border-[#4a9eff]/40 text-[#4a9eff]'
-                      : 'border-[#333] text-[#555] hover:text-[#888] hover:border-[#444]'
-                  }`}
+                  className="px-6 py-2.5 text-[10px] uppercase tracking-[0.15em] rounded border border-[#333] bg-black text-[#555] hover:text-[#4a9eff] hover:border-[#4a9eff]/40 hover:bg-[#4a9eff]/10 transition-all font-mono"
                 >
                   {label}
                 </Link>
@@ -214,7 +188,7 @@ export default function Home() {
             </span>
           </div>
           <div className="flex items-center gap-4">
-            <span>johor bahru, my</span>
+            <span>my</span>
           </div>
         </div>
       </motion.div>
