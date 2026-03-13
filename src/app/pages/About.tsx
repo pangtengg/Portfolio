@@ -121,7 +121,7 @@ export default function About() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 md:gap-8"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
         >
           {/* Profile Photo - No Frame */}
           <div className="w-full max-w-[200px] md:max-w-none mx-auto md:mx-0">
@@ -139,7 +139,7 @@ export default function About() {
           </div>
 
           {/* Bio Text */}
-          <div className="space-y-4">
+          <div className="md:col-span-2 space-y-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
