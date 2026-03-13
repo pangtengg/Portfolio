@@ -43,12 +43,12 @@ const travelLocations = [
 
 const thoughts = [
   {
-    title: 'kindness',
+    title: 'kind',
     date: '06/03/2026',
-    content: 'i would like to relate to a chinese saying i grew up with <人之初，性本善。性相近，習相遠。> from three characteristics classic (三字經) which means all men are born with good and similar nature. it is through the environment that shapes our personalities and behaviours. it led me thinking how really the society plays and works really changes our mindsets and perceptions on wealth, material possessions, and the pursuit of happiness. for me kindness means the willingness to help someone when theyre in need which should be the instinct of men but now i dont understand why theres probably ww3 in the near future and people are bombing each other. i dont really understand why we operate the world like this or how to this extent that this world has been operated. idk what im talking about anyways ill always stand by kindness breaks rocks and melts hearts happy friday!',
+    content: 'i would like to relate to a chinese saying i grew up with <人之初，性本善。性相近，習相遠。> from three characteristics classic (三字經) which means all men are born with good and similar nature. it is through the environment that shapes our personalities and behaviours. it led me thinking how really the society plays and works really changes our mindsets and perceptions on wealth, material possessions, and the pursuit of happiness. for me kindness means the willingness to help someone when theyre in need which should be the instinct of men but now i dont understand why theres probably ww3 in the near future for people trying to claim everything but we are born with nothing. i dont really understand why the world is operated by now or how to this extent that this world has been operated. idk what im talking about anyways ill always stand by kindness breaks rocks and melts hearts happy friday!',
   },
   {
-    title: 'im 22',
+    title: 'halo world im 22 :D',
     date: '01/03/2026',
     content: 'ive came to realised that time does really flies, life is impermanent and im still unsure (quoting who knows by daniel caesar: is it a crime to be unsure) what my mission on earth and why do i live :D',
   },
@@ -235,7 +235,7 @@ export default function Interests() {
           transition={{ delay: 0.2 }}
           className="space-y-8 mt-16"
         >
-          <h2 className="font-mono text-sm uppercase tracking-wider text-[#8E8E8E]">✎ᝰ thoughts</h2>
+          <h2 className="font-mono text-sm uppercase tracking-wider text-[#8E8E8E]">✎ᝰ letters from me</h2>
 
           <div className="space-y-1">
             {thoughts.map((thought, idx) => (

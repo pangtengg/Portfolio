@@ -74,7 +74,9 @@ export default function About() {
         const json = await res.json();
 
         const weeksData = json?.data?.user?.contributionsCollection?.contributionCalendar?.weeks || [];
-        setWeeks(weeksData);
+        // Keep only the latest 52 weeks (1 year) to show most recent contributions
+        const recentWeeks = weeksData.slice(-52);
+        setWeeks(recentWeeks);
       } catch (err) {
         console.error('Failed to fetch GitHub contributions', err);
       }
@@ -119,10 +121,10 @@ export default function About() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
-          className="grid md:grid-cols-[300px_minmax(0,1fr)] gap-8"
+          className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 md:gap-8"
         >
           {/* Profile Photo - No Frame */}
-          <div>
+          <div className="w-full max-w-[200px] md:max-w-none mx-auto md:mx-0">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -131,7 +133,8 @@ export default function About() {
               <img
                 src={profileImage}
                 alt="kueh pang teng"
-                className="w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500"              />
+                className="w-full aspect-square object-cover grayscale hover:grayscale-0 transition duration-500"
+              />
             </motion.div>
           </div>
 
@@ -174,8 +177,8 @@ export default function About() {
                   </a>
                 </div>
                 {/* GitHub Contribution Grid (real data) */}
-                  <div className="w-full overflow-hidden">
-                    {weeks.length === 0 ? (
+                <div className="w-full overflow-x-auto overflow-y-hidden pb-2">
+                  {weeks.length === 0 ? (
                     <div className="grid grid-cols-12 gap-1">
                       {Array.from({ length: 84 }).map((_, i) => (
                         <div
@@ -185,7 +188,7 @@ export default function About() {
                       ))}
                     </div>
                   ) : (
-                    <div className="flex gap-1">
+                    <div className="flex gap-1 min-w-max">
                       {weeks.map((week: any, wi: number) => (
                         <div key={wi} className="flex flex-col gap-1">
                           {week.contributionDays.map((day: any) => (
@@ -197,17 +200,17 @@ export default function About() {
                               aria-label={`${day.contributionCount} contributions on ${day.date}`}
                               title={`${day.contributionCount} contributions on ${day.date}`}
                               style={{
-                                width: 14,
-                                height: 14,
+                                width: 12,
+                                height: 12,
                                 backgroundColor: getColor(day.contributionCount),
-                                borderRadius: 3,
+                                borderRadius: 2,
                                 transition: 'transform 0.15s ease, box-shadow 0.15s ease',
                                 boxShadow:
                                   hoveredDay?.date === day.date
                                     ? '0 0 6px rgba(255,255,255,0.06)'
                                     : 'none',
                               }}
-                              className="hover:scale-125 cursor-pointer"
+                              className="hover:scale-125 cursor-pointer md:w-[14px] md:h-[14px]"
                             />
                           ))}
                         </div>
