@@ -17,17 +17,23 @@ const travelLocations = [
   {
     name: "japan",
     folder: 'jpn',
-    photos: Array.from({ length: 10 }, (_, i) => `/jpn/jpn${i + 1}.jpg`),
+    photos: Array.from({ length: 23 }, (_, i) => `/jpn/jpn${i + 1}.jpg`),
   },
   {
     name: "sydney",
     folder: 'syd',
-    photos: Array.from({ length: 13 }, (_, i) => `/syd/syd${i + 1}.jpg`),
+    photos: Array.from({ length: 23 }, (_, i) => `/syd/syd${i + 1}.jpg`),
   },
   {
     name: "melbourne",
     folder: 'mel',
-    photos: Array.from({ length: 10 }, (_, i) => `/mel/mel${i + 1}.jpg`),
+    photos: [
+      '/mel/mel2.jpg', '/mel/mel3.jpg', '/mel/mel4.jpg', '/mel/mel5.jpg',
+      '/mel/mel6.jpg', '/mel/mel7.jpg', '/mel/mel8.jpg', '/mel/mel9.jpg',
+      '/mel/mel10.jpg', '/mel/me11.jpg', '/mel/mel12.jpg', '/mel/mel13.jpg',
+      '/mel/mel14.jpg', '/mel/mel15.jpg', '/mel/mel16.jpg', '/mel/mel17.jpg',
+      '/mel/mel18.jpg', '/mel/mel19.jpg', '/mel/mel20.jpg', '/mel/mel21.jpg'
+    ],
   },
   {
     name: "seoul",
@@ -290,11 +296,11 @@ export default function Interests() {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="bg-[#1a1a1a] border-2 border-white max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8"
+              className="bg-[#1a1a1a] border-2 border-white max-w-5xl w-full max-h-[90vh] overflow-y-auto p-4 md:p-8 mx-4"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex justify-between items-center mb-8">
-                <h2 className="font-serif text-3xl text-white">{selectedLocation}'s archive</h2>
+              <div className="flex justify-between items-center mb-4 md:mb-8">
+                <h2 className="font-serif text-xl md:text-3xl text-white">{selectedLocation}'s archive</h2>
                 <button
                   onClick={() => setSelectedLocation(null)}
                   className="p-2 hover:bg-white/10 rounded cursor-hover"
@@ -304,7 +310,7 @@ export default function Interests() {
               </div>
 
               {/* Mood Board - Masonry Layout */}
-              <Masonry columnsCount={3} gutter="8px">
+              <div className="columns-2 md:columns-3 gap-2">
                 {selectedLocationData.photos.map((photo, idx) => (
                   <motion.div
                     key={idx}
@@ -321,7 +327,7 @@ export default function Interests() {
                     />
                   </motion.div>
                 ))}
-              </Masonry>
+              </div>
             </motion.div>
           </motion.div>
         )}
