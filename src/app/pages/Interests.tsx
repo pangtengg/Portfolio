@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, X } from 'lucide-react';
 import Masonry from 'react-responsive-masonry';
 import { RecordPlayer } from '../components/RecordPlayer';
+import PostcardsHangman from './PostcardsHangman';
 
 const PERSONAL_HITS = [
   { id: '2C5nlzIMJ81NYmeGhofNNP' },
@@ -65,6 +66,7 @@ export default function Interests() {
   const iframeRefs = useRef<Record<string, HTMLIFrameElement | null>>({})
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const [expandedThought, setExpandedThought] = useState<number | null>(null);
+  const [postcardsUnlocked, setPostcardsUnlocked] = useState(false);
 
   const selectedLocationData = travelLocations.find((loc) => loc.name === selectedLocation);
 
@@ -200,15 +202,22 @@ export default function Interests() {
 
       {/* Travel Folders - Now "Postcards" */}
       <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="space-y-8 mt-16"
-        >
-          <div className="flex items-center gap-3">
-            <h2 className="font-mono text-sm uppercase tracking-wider text-[#8E8E8E]">⚲ postcards</h2>
-          </div>
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="space-y-8 mt-16"
+      >
+        <div className="flex items-center gap-3">
+          <h2 className="font-mono text-sm uppercase tracking-wider text-[#8E8E8E]">⚲ postcards</h2>
+        </div>
 
+        {/* Hangman Game - Locks the postcards until solved */}
+        {!postcardsUnlocked && (
+          <PostcardsHangman onUnlocked={() => setPostcardsUnlocked(true)} />
+        )}
+
+        {/* Postcards Grid - Hidden until unlocked */}
+        <div style={{ display: postcardsUnlocked ? 'block' : 'none' }}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8">
             {travelLocations.map((location, idx) => (
               <motion.div
@@ -232,7 +241,8 @@ export default function Interests() {
               </motion.div>
             ))}
           </div>
-        </motion.section>
+        </div>
+      </motion.section>
 
         {/* Thoughts Timeline */}
         <motion.section
