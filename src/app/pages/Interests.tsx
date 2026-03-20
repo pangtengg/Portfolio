@@ -218,26 +218,52 @@ export default function Interests() {
 
         {/* Postcards Grid - Hidden until unlocked */}
         <div style={{ display: postcardsUnlocked ? 'block' : 'none' }}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {travelLocations.map((location, idx) => (
               <motion.div
                 key={location.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
-                whileHover={{ y: -4, rotate: -2 }}
+                whileHover={{ y: -8 }}
                 onClick={() => setSelectedLocation(location.name)}
-                className="relative bg-[#2B2B2B] border border-[#3A3A3A] p-6 pb-12 cursor-pointer hover:border-white transition-all cursor-hover"
+                className="flex flex-col items-center cursor-pointer group"
               >
-                {/* Folder Tab */}
-                <div className="absolute -top-3 left-4 bg-[#2B2B2B] border border-[#3A3A3A] border-b-0 px-4 py-1 font-mono text-xs text-white whitespace-nowrap">
-                  {location.name}
+                {/* Photo Stack */}
+                <div className="relative h-52 w-44 flex items-center justify-center mb-5">
+                  {location.photos.slice(0, 5).map((photo, photoIdx) => {
+                    const rotations = [-12, -6, 0, 8, 15];
+                    const offsetsX = [-6, -3, 0, 4, 8];
+                    const offsetsY = [3, 1, 0, 3, 5];
+                    return (
+                      <motion.div
+                        key={photoIdx}
+                        className="absolute w-36 h-48 bg-[#1a1a1a] border-2 border-white/20 overflow-hidden shadow-2xl rounded-sm"
+                        style={{
+                          zIndex: 5 - photoIdx,
+                          transform: `rotate(${rotations[photoIdx]}deg) translateX(${offsetsX[photoIdx]}px) translateY(${offsetsY[photoIdx]}px)`,
+                        }}
+                        whileHover={{
+                          rotate: rotations[photoIdx] * 1.2,
+                          scale: 1.08,
+                          transition: { duration: 0.2 },
+                        }}
+                      >
+                        <img
+                          src={photo}
+                          alt={`${location.name} ${photoIdx + 1}`}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </motion.div>
+                    );
+                  })}
                 </div>
 
-                {/* Folder Icon */}
-                <div className="flex items-center justify-center h-24 text-4xl opacity-60">
-                  📁
-                </div>
+                {/* Location Name */}
+                <span className="font-mono text-sm text-[#8E8E8E] group-hover:text-white transition-colors">
+                  {location.name}
+                </span>
               </motion.div>
             ))}
           </div>
