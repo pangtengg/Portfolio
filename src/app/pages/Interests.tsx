@@ -28,13 +28,12 @@ const travelLocations = [
   {
     name: "melbourne",
     folder: 'mel',
-    photos: [
-      '/mel/mel2.jpg', '/mel/mel3.jpg', '/mel/mel4.jpg', '/mel/mel5.jpg',
-      '/mel/mel6.jpg', '/mel/mel7.jpg', '/mel/mel8.jpg', '/mel/mel9.jpg',
-      '/mel/mel10.jpg', '/mel/me11.jpg', '/mel/mel12.jpg', '/mel/mel13.jpg',
-      '/mel/mel14.jpg', '/mel/mel15.jpg', '/mel/mel16.jpg', '/mel/mel17.jpg',
-      '/mel/mel18.jpg', '/mel/mel19.jpg', '/mel/mel20.jpg', '/mel/mel21.jpg'
-    ],
+    photos: Array.from({ length: 23 }, (_, i) => `/mel/mel${i + 1}.jpg`),
+  },
+  {
+    name: "singapore",
+    folder: 'sgd',
+    photos: Array.from({ length: 4 }, (_, i) => `/sgd/sg${i + 1}.jpg`),
   },
   {
     name: "seoul",
@@ -46,6 +45,7 @@ const travelLocations = [
     folder: 'sha',
     photos: Array.from({ length: 4 }, (_, i) => `/sha/sha${i + 1}.jpg`),
   },
+  
 ];
 
 const thoughts = [
@@ -345,22 +345,24 @@ export default function Interests() {
                 </button>
               </div>
 
-              {/* Mood Board - Masonry Layout */}
-              <div className="columns-2 md:columns-3 gap-2">
+              {/* Pinterest-style Masonry Layout */}
+              <div className="columns-3 md:columns-4 lg:columns-5 gap-3">
                 {selectedLocationData.photos.map((photo, idx) => (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: idx * 0.05 }}
-                    className="break-inside-avoid mb-2"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.03 }}
+                    className="break-inside-avoid mb-3"
                   >
-                    <img
-                      src={photo}
-                      alt={`${selectedLocation} ${idx + 1}`}
-                      className="w-full h-auto block"
-                      loading="lazy"
-                    />
+                    <div className="rounded-xl overflow-hidden bg-[#2B2B2B]">
+                      <img
+                        src={photo}
+                        alt={`${selectedLocation} ${idx + 1}`}
+                        className="w-full h-auto block hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    </div>
                   </motion.div>
                 ))}
               </div>
