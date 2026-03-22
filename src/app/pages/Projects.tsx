@@ -106,7 +106,7 @@ function TechGallery() {
     <div className="lg:w-1/2 flex flex-col gap-4 items-center justify-center">
       {/* Main Image */}
       <div
-        className="relative overflow-hidden rounded-xl bg-[#1a1a1a] aspect-[3/2] max-h-[400px]"
+        className="relative overflow-hidden rounded-xl bg-[#1a1a1a] aspect-[3/2] w-full max-w-md"
         onMouseEnter={() => { if (timerRef.current) clearInterval(timerRef.current); }}
         onMouseLeave={startTimer}
       >
@@ -144,7 +144,7 @@ function TechGallery() {
       {/* Thumbnails */}
       <div 
         ref={thumbnailsRef}
-        className="w-full flex gap-2 overflow-x-auto pb-1 scrollbar-hide"
+        className="w-full max-w-md flex gap-2 overflow-x-auto pb-1 scrollbar-hide"
       >
         {techPhotos.map((photo, idx) => (
           <button
@@ -361,42 +361,7 @@ export default function Projects() {
           </div>
         </motion.div>
 
-        {/* Gallery of Trying + Tech Photo Gallery */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35 }}
-          className="flex flex-col lg:flex-row gap-8"
-        >
-          {/* Left: Hackathon List */}
-          <div className="space-y-4 lg:w-1/2">
-            <h2 className="font-mono text-xs uppercase tracking-wider text-[#8E8E8E] mb-6 ml-4">
-              gallery of trying
-            </h2>
-            <ul className="space-y-2 text-sm text-[#B4B4B4] ml-4">
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>hackomania 2026</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>nus agent forge hackathon</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>kitahack 2026</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>cursor x anthropic hackathon 2025 - 2nd place (tidb track)</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>codenection hackathon 2025</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>cimb x microsoft data science & gen ai hackathon - 1st runner up</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>great malaysia ai hackathon</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>kitahack 2025</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>iium disrupt 2025</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>vhack 2025 - consolation award</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>um hackathon 2025</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>umdac datathon 2024 - top 10 finalist</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>codenection open category 2024</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>mcmc datathon 2024</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>google workspace hackathon 2024</span></li>
-            </ul>
-          </div>
-
-          {/* Right: Tech Photo Gallery */}
-          <TechGallery />
-        </motion.div>
-
-        {/* Other Projects List */}
+                {/* Other Projects List */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -477,6 +442,43 @@ export default function Projects() {
             ))}
           </div>
         </motion.div>
+
+        {/* Gallery of Trying + Tech Photo Gallery */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35 }}
+          className="flex flex-col lg:flex-row gap-8"
+        >
+          {/* Left: Hackathon List */}
+          <div className="space-y-4 lg:w-1/2">
+            <h2 className="font-mono text-xs uppercase tracking-wider text-[#8E8E8E] mb-6 ml-4">
+              gallery of trying
+            </h2>
+            <ul className="space-y-2 text-sm text-[#B4B4B4] ml-4">
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>hackomania 2026</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>nus agent forge hackathon</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>kitahack 2026</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>cursor x anthropic hackathon 2025 - 2nd place (tidb track)</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>codenection hackathon 2025</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>cimb x microsoft data science & gen ai hackathon - 1st runner up</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>great malaysia ai hackathon</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>kitahack 2025</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>iium disrupt 2025</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>vhack 2025 - consolation award</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>um hackathon 2025</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>umdac datathon 2024 - top 10 finalist</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>codenection open category 2024</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>mcmc datathon 2024</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>google workspace hackathon 2024</span></li>
+            </ul>
+          </div>
+
+          {/* Right: Tech Photo Gallery */}
+          <TechGallery />
+        </motion.div>
+
+
       </div>
 
       {/* Project Detail Modal */}
