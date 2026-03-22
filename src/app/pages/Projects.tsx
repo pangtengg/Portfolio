@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Github, ExternalLink, X } from 'lucide-react';
 
@@ -48,9 +48,125 @@ const otherProjects = [
   { id: 6, title: 'medimind for vhack25', github: 'https://github.com/Xuannn28/vhack2025', demo: 'https://youtu.be/1X-N-HAiz5s', description: 'ai-powered healthcare assistant with functionalities such as smart reminders, appointment booking, transcription services, and an AI chatbot, in addition to providing emergency contact support for mental health crises', tags: ['react native'] },
   { id: 7, title: 'finassist for cursor hackathon', github: 'https://github.com/yccccc12/finance-assistance', demo: 'https://devpost.com/software/finger', description: 'personal finance assistant with transaction tracking, receipt scanner, shared bill splitting with whatsapp message, subscription tracker, ai financial assistant with rag', tags: ['next.js', 'tailwind css', 'tidb cloud database', 'fastapi', 'elevenlabs', 'cursor'] },
   { id: 8, title: 'safepatch disaster prediction', github: 'https://github.com/pangtengg/disaster-prediction', demo: '#', description: 'machine learning model for predicting natural disasters', tags: ['python', 'automl', 'huggingface'] },
-  { id: 9, title: 'chronovault ai museum for agentforce', github: 'https://github.com/AMBERKUEH/agentforce', demo: '#', description: 'interactive 3D museum with for historical exhibits', tags: ['react', 'three.js', 'node.js + express', 'wavespeed for img generation', 'insforge', 'qoder'] },
+  { id: 9, title: 'chronovault ai museum for agentforge', github: 'https://github.com/AMBERKUEH/agentforce', demo: '#', description: 'interactive 3D museum with for historical exhibits', tags: ['react', 'three.js', 'node.js + express', 'wavespeed for img generation', 'insforge', 'qoder'] },
   { id: 10, title: 'energy mind for hackomania', github: 'https://github.com/pangtengg/energymind', demo: 'https://youtu.be/Bn2hh0TKaxw?si=YmgWL2huCyxJe1xb', description: 'energy management mobile app with ml-powered optimization suggestions', tags: ['react native', 'typescript', 'javascript', 'python', 'manus'] },
 ];
+
+const techPhotos = [
+  { src: '/tech/tech1.jpg', caption: 'great msia ai hackathon, using aws for the first time' },
+  { src: '/tech/tech2.jpg', caption: 'random relatable finds at a bookstore ;D' },
+  { src: '/tech/tech3.jpg', caption: 'first time as a finalist presenter in a datathon' },
+  { src: '/tech/tech4.jpg', caption: 'vhack small consolation win' },
+  { src: '/tech/tech5.jpg', caption: 'codenection programming been competitive' },
+  { src: '/tech/tech7.jpg', caption: 'cursor in malaysia hackathon' },
+  { src: '/tech/tech8.jpg', caption: 'shooting with vhack mascot after presentation' },
+  { src: '/tech/tech9.jpg', caption: 'agent forge hackathon at nus' },
+  { src: '/tech/tech10.jpg', caption: 'iumdisrupt demoing' },
+  { src: '/tech/tech11.jpg', caption: 'datathon presentation mode' },
+  { src: '/tech/tech12.jpg', caption: 'cimb x msoft hacks' },
+  { src: '/tech/tech13.jpg', caption: 'vhack presentation' },
+  { src: '/tech/tech14.jpg', caption: 'largest aws hackathon with asean record' },
+  { src: '/tech/tech15.jpg', caption: 'hackomania vibes' },
+];
+
+function TechGallery() {
+  const [current, setCurrent] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const thumbnailsRef = useRef<HTMLDivElement>(null);
+
+  const startTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCurrent(prev => (prev + 1) % techPhotos.length);
+    }, 3000);
+  }, []);
+
+  useEffect(() => {
+    startTimer();
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [startTimer]);
+
+  // Scroll thumbnails to keep current image in view
+  useEffect(() => {
+    if (thumbnailsRef.current) {
+      const container = thumbnailsRef.current;
+      const thumbnailWidth = container.firstElementChild?.clientWidth || 80;
+      const gap = 8; // approximate gap size
+      const scrollPosition = current * (thumbnailWidth + gap) - container.clientWidth / 2 + thumbnailWidth / 2;
+      container.scrollTo({ left: Math.max(0, scrollPosition), behavior: 'smooth' });
+    }
+  }, [current]);
+
+  const go = (dir: number) => {
+    setCurrent(prev => (prev + dir + techPhotos.length) % techPhotos.length);
+    startTimer();
+  };
+
+  return (
+    <div className="lg:w-1/2 flex flex-col gap-4 items-center justify-center">
+      {/* Main Image */}
+      <div
+        className="relative overflow-hidden rounded-xl bg-[#1a1a1a] aspect-[3/2] max-h-[400px]"
+        onMouseEnter={() => { if (timerRef.current) clearInterval(timerRef.current); }}
+        onMouseLeave={startTimer}
+      >
+        <AnimatePresence mode="popLayout">
+          <motion.img
+            key={current}
+            src={techPhotos[current].src}
+            alt={techPhotos[current].caption}
+            className="w-full h-full object-cover"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.4 }}
+          />
+        </AnimatePresence>
+        {/* Caption overlay */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-3 py-2">
+          <p className="font-mono text-xs text-white/80">{techPhotos[current].caption}</p>
+        </div>
+        {/* Nav buttons */}
+        <button
+          onClick={() => go(-1)}
+          className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-black/50 hover:bg-black/80 rounded-full flex items-center justify-center text-white transition-colors"
+        >
+          ‹
+        </button>
+        <button
+          onClick={() => go(1)}
+          className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-black/50 hover:bg-black/80 rounded-full flex items-center justify-center text-white transition-colors"
+        >
+          ›
+        </button>
+      </div>
+
+      {/* Thumbnails */}
+      <div 
+        ref={thumbnailsRef}
+        className="w-full flex gap-2 overflow-x-auto pb-1 scrollbar-hide"
+      >
+        {techPhotos.map((photo, idx) => (
+          <button
+            key={idx}
+            onClick={() => { setCurrent(idx); startTimer(); }}
+            className={`flex-shrink-0 w-20 h-14 rounded-md overflow-hidden border-2 transition-all ${
+              idx === current ? 'border-white scale-110' : 'border-transparent opacity-50 hover:opacity-80'
+            }`}
+          >
+            <img 
+              src={photo.src} 
+              alt="" 
+              className={`w-full h-full object-cover transition-all duration-300 ${
+                idx === current ? 'grayscale-0' : 'grayscale'
+              }`} 
+            />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
@@ -245,78 +361,39 @@ export default function Projects() {
           </div>
         </motion.div>
 
-        {/* Gallery of Trying */}
+        {/* Gallery of Trying + Tech Photo Gallery */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35 }}
-          className="space-y-4"
+          className="flex flex-col lg:flex-row gap-8"
         >
-          <h2 className="font-mono text-xs uppercase tracking-wider text-[#8E8E8E] mb-6 ml-4">
-            gallery of trying
-          </h2>
-          <ul className="space-y-2 text-sm text-[#B4B4B4] ml-4">
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>hackomania 2026</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>nus agent force hackathon</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>kitahack 2026</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>cursor x anthropic hackathon 2025 - 2nd place (tidb track)</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>codenection hackathon 2025</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>cimb x microsoft data science & gen ai hackathon - 1st runner up</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>great malaysia ai hackathon</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>kitahack 2025</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>iium disrupt 2025</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>vhack 2025 - consolation award</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>um hackathon 2025</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>umdac datathon 2024 - top 10 finalist</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>codenection open category 2024</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>mcmc datathon 2024</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-[#555]">-</span>
-              <span>google workspace hackathon 2024</span>
-            </li>
-          </ul>
+          {/* Left: Hackathon List */}
+          <div className="space-y-4 lg:w-1/2">
+            <h2 className="font-mono text-xs uppercase tracking-wider text-[#8E8E8E] mb-6 ml-4">
+              gallery of trying
+            </h2>
+            <ul className="space-y-2 text-sm text-[#B4B4B4] ml-4">
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>hackomania 2026</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>nus agent forge hackathon</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>kitahack 2026</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>cursor x anthropic hackathon 2025 - 2nd place (tidb track)</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>codenection hackathon 2025</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>cimb x microsoft data science & gen ai hackathon - 1st runner up</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>great malaysia ai hackathon</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>kitahack 2025</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>iium disrupt 2025</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>vhack 2025 - consolation award</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>um hackathon 2025</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>umdac datathon 2024 - top 10 finalist</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>codenection open category 2024</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>mcmc datathon 2024</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>google workspace hackathon 2024</span></li>
+            </ul>
+          </div>
+
+          {/* Right: Tech Photo Gallery */}
+          <TechGallery />
         </motion.div>
 
         {/* Other Projects List */}
