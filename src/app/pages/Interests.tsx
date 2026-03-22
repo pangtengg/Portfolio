@@ -58,6 +58,11 @@ const travelLocations = [
 ];
 
 const thoughts = [
+    {
+    title: 'ditto ⟆͟ ͠ ‧͟ ᐧ 𑁤',
+    date: '#',
+    content: 'fyi ditto in pokémon can transform into its opponent and copy all its stats and boosts, and i kinda wanna relate this irl to adapt freely and instantaneously to different environments and figuring out the best way to handle situations. with that i really really also wanna play pokopia ˙◠˙',
+  },
   {
     title: 'kind',
     date: '06/03/2026',
