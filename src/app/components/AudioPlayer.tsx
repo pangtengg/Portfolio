@@ -20,16 +20,37 @@ export default function AudioPlayer() {
         setIsPlaying(true);
       }).catch((err) => {
         // Auto-play failed - browser blocked it
-        console.log('Auto-play blocked by browser, showing play button');
+        console.log('Auto-play blocked by browser');
         setIsPlaying(false);
       });
     }
+
+    // Add click listener to start audio on first user interaction
+    const handleFirstInteraction = () => {
+      if (!isPlaying && audioRef.current) {
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+        }).catch(err => console.log('Play after interaction failed:', err));
+        
+        // Remove listeners after first interaction
+        document.removeEventListener('click', handleFirstInteraction);
+        document.removeEventListener('keydown', handleFirstInteraction);
+        document.removeEventListener('touchstart', handleFirstInteraction);
+      }
+    };
+
+    document.addEventListener('click', handleFirstInteraction);
+    document.addEventListener('keydown', handleFirstInteraction);
+    document.addEventListener('touchstart', handleFirstInteraction);
 
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
       }
+      document.removeEventListener('click', handleFirstInteraction);
+      document.removeEventListener('keydown', handleFirstInteraction);
+      document.removeEventListener('touchstart', handleFirstInteraction);
     };
   }, []);
 
