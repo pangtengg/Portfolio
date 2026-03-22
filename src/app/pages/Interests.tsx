@@ -45,7 +45,11 @@ const travelLocations = [
     folder: 'sha',
     photos: Array.from({ length: 4 }, (_, i) => `/sha/sha${i + 1}.jpg`),
   },
-  
+    {
+    name: "peking",
+    folder: 'pku',
+    photos: Array.from({ length: 49 }, (_, i) => `/pku/pku${i + 1}.jpg`),
+  },
 ];
 
 const thoughts = [
