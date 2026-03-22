@@ -28,12 +28,12 @@ const travelLocations = [
   {
     name: "melbourne",
     folder: 'mel',
-    photos: Array.from({ length: 23 }, (_, i) => `/mel/mel${i + 1}.jpg`),
+    photos: Array.from({ length: 20 }, (_, i) => `/mel/mel${i + 1}.jpg`),
   },
   {
     name: "singapore",
     folder: 'sgd',
-    photos: Array.from({ length: 4 }, (_, i) => `/sgd/sg${i + 1}.jpg`),
+    photos: Array.from({ length: 7 }, (_, i) => `/sgd/sg${i + 1}.jpg`),
   },
   {
     name: "seoul",
@@ -218,7 +218,7 @@ export default function Interests() {
 
         {/* Postcards Grid - Hidden until unlocked */}
         <div style={{ display: postcardsUnlocked ? 'block' : 'none' }}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             {travelLocations.map((location, idx) => (
               <motion.div
                 key={location.name}
@@ -230,15 +230,22 @@ export default function Interests() {
                 className="flex flex-col items-center cursor-pointer group"
               >
                 {/* Photo Stack */}
-                <div className="relative h-52 w-44 flex items-center justify-center mb-5">
+                <div className="relative h-32 w-24 sm:h-40 sm:w-32 md:h-52 md:w-44 flex items-center justify-center mb-3 md:mb-5">
                   {location.photos.slice(0, 5).map((photo, photoIdx) => {
-                    const rotations = [-12, -6, 0, 8, 15];
+                    // First photo straight, rest with random rotations
+                    const getRotation = (idx: number) => {
+                      if (idx === 0) return 0; // First photo always straight
+                      const randomRotations = [-8, -15, 12, -5, 10, -18, 14, 7];
+                      return randomRotations[(idx + photoIdx) % randomRotations.length];
+                    };
+                    
+                    const rotations = [0, ...Array.from({ length: 4 }, (_, i) => getRotation(i + 1))];
                     const offsetsX = [-6, -3, 0, 4, 8];
                     const offsetsY = [3, 1, 0, 3, 5];
                     return (
                       <motion.div
                         key={photoIdx}
-                        className="absolute w-36 h-48 bg-[#1a1a1a] border-2 border-white/20 overflow-hidden shadow-2xl rounded-sm"
+                        className="absolute w-20 h-28 sm:w-28 sm:h-36 md:w-36 md:h-48 bg-[#1a1a1a] border border-white/20 overflow-hidden shadow-2xl rounded-sm"
                         style={{
                           zIndex: 5 - photoIdx,
                           transform: `rotate(${rotations[photoIdx]}deg) translateX(${offsetsX[photoIdx]}px) translateY(${offsetsY[photoIdx]}px)`,
@@ -261,7 +268,7 @@ export default function Interests() {
                 </div>
 
                 {/* Location Name */}
-                <span className="font-mono text-sm text-[#8E8E8E] group-hover:text-white transition-colors">
+                <span className="font-mono text-xs sm:text-sm text-[#8E8E8E] group-hover:text-white transition-colors">
                   {location.name}
                 </span>
               </motion.div>

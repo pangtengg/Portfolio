@@ -64,7 +64,7 @@ const techPhotos = [
   { src: '/tech/tech10.jpg', caption: 'iumdisrupt demoing' },
   { src: '/tech/tech11.jpg', caption: 'datathon presentation mode' },
   { src: '/tech/tech12.jpg', caption: 'cimb x msoft hacks' },
-  { src: '/tech/tech13.jpg', caption: 'vhack presentation' },
+  { src: '/tech/tech13.jpg', caption: 'datathon!!' },
   { src: '/tech/tech14.jpg', caption: 'largest aws hackathon with asean record' },
   { src: '/tech/tech15.jpg', caption: 'hackomania vibes' },
 ];
