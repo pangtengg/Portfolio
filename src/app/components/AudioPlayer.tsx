@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Volume2, VolumeX } from 'lucide-react';
 
 export default function AudioPlayer() {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -12,8 +12,18 @@ export default function AudioPlayer() {
     audioRef.current = new Audio('/keshi - forever.mp3');
     audioRef.current.loop = true;
     
-    // Auto-play on load
-    audioRef.current.play().catch(err => console.log('Auto-play failed:', err));
+    // Try to auto-play on load
+    const playPromise = audioRef.current.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        // Auto-play succeeded
+        setIsPlaying(true);
+      }).catch((err) => {
+        // Auto-play failed - browser blocked it
+        console.log('Auto-play blocked by browser, showing play button');
+        setIsPlaying(false);
+      });
+    }
 
     return () => {
       if (audioRef.current) {
