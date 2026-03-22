@@ -97,6 +97,22 @@ export default function AudioPlayer() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Play button (shown when not playing) */}
+        {!isPlaying && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileHover={{ scale: 1.1 }}
+            onClick={togglePlay}
+            className="w-10 h-10 flex items-center justify-center text-white bg-white/20 backdrop-blur-md border border-white/30 rounded-full hover:bg-white/30 transition-all"
+            style={{
+              filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.5))',
+            }}
+          >
+            <Volume2 size={24} />
+          </motion.button>
+        )}
       </div>
     </>
   );
