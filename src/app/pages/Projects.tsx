@@ -456,6 +456,7 @@ export default function Projects() {
               gallery of trying
             </h2>
             <ul className="space-y-2 text-sm text-[#B4B4B4] ml-4">
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>chin hin ai hackathon - 2nd runner up </span></li>
               <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>hackomania 2026</span></li>
               <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>nus agent forge hackathon</span></li>
               <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>kitahack 2026</span></li>
