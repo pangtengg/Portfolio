@@ -55,17 +55,17 @@ const otherProjects = [
 const techPhotos = [
   { src: '/tech/tech1.jpg', caption: 'great msia ai hackathon, using aws for the first time' },
   { src: '/tech/tech2.jpg', caption: 'random relatable finds at a bookstore ;D' },
-  { src: '/tech/tech3.jpg', caption: 'first time as a finalist presenter in a datathon' },
+  { src: '/tech/tech3.jpg', caption: 'first time presenting @usm as a finalist' },
   { src: '/tech/tech4.jpg', caption: 'vhack small consolation win' },
   { src: '/tech/tech5.jpg', caption: 'codenection programming been competitive' },
-  { src: '/tech/tech7.jpg', caption: 'cursor in malaysia hackathon' },
-  { src: '/tech/tech8.jpg', caption: 'shooting with vhack mascot after presentation' },
+  { src: '/tech/tech7.jpg', caption: 'cursor anthropic malaysia hackathon' },
+  { src: '/tech/tech8.jpg', caption: 'vhack mascot' },
   { src: '/tech/tech9.jpg', caption: 'agent forge hackathon at nus' },
-  { src: '/tech/tech10.jpg', caption: 'iumdisrupt demoing' },
+  { src: '/tech/tech10.jpg', caption: 'iumdisrupt booth pitching' },
   { src: '/tech/tech11.jpg', caption: 'datathon presentation mode' },
   { src: '/tech/tech12.jpg', caption: 'cimb x msoft hacks' },
   { src: '/tech/tech13.jpg', caption: 'datathon!!' },
-  { src: '/tech/tech14.jpg', caption: 'largest aws hackathon with asean record' },
+  { src: '/tech/tech14.jpg', caption: 'great msia ai hackathon with asean record' },
   { src: '/tech/tech15.jpg', caption: 'hackomania vibes' },
 ];
 
@@ -456,15 +456,15 @@ export default function Projects() {
               gallery of trying
             </h2>
             <ul className="space-y-2 text-sm text-[#B4B4B4] ml-4">
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>national health hackathon - top 10 finalist</span></li>
               <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>chin hin ai hackathon - 2nd runner up </span></li>
               <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>hackomania 2026</span></li>
               <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>nus agent forge hackathon</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>kitahack 2026</span></li>
               <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>cursor x anthropic hackathon 2025 - 2nd place (tidb track)</span></li>
               <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>codenection hackathon 2025</span></li>
               <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>cimb x microsoft data science & gen ai hackathon - 1st runner up</span></li>
               <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>great malaysia ai hackathon</span></li>
-              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>kitahack 2025</span></li>
+              <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>kitahack 2025, 2026</span></li>
               <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>iium disrupt 2025</span></li>
               <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>vhack 2025 - consolation award</span></li>
               <li className="flex items-start gap-2"><span className="text-[#555]">-</span><span>um hackathon 2025</span></li>
