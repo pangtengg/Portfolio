@@ -292,22 +292,24 @@ export default function About() {
               </div>
             </motion.div>
 
-            {/* Resume Download */}
+            {/* Resume Download - hidden for now */}
+            {/* 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
             >
-            <a
-              href="https://docs.google.com/document/d/1jITWz0-vwzyKlS7l7Ziy-RMZJeYIDUt1z5T4BqBjXhA/preview"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-3 bg-white text-black font-mono text-sm hover:bg-[#E0E0E0] transition-colors cursor-hover"
-            >
-              <Download size={16} />
-              <span>resume</span>
-            </a>
+              <a
+                href="https://docs.google.com/document/d/xxx/preview"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full py-3 bg-white text-black font-mono text-sm hover:bg-[#E0E0E0] transition-colors cursor-hover"
+              >
+                <Download size={16} />
+                <span>resume</span>
+              </a>
             </motion.div>
+            */}
           </div>
 
           {/* Right Column */}
